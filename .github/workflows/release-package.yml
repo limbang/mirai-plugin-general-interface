@@ -1,0 +1,25 @@
+name: Publish package to GitHub Packages
+on:
+  # 触发条件
+  release:
+    types: [ created ]
+jobs:
+  # 任务名称
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      # 检出项目仓库的副本
+      - uses: actions/checkout@v2
+      # 设置JDK 版本
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      # 发布包
+      - name: Publish package
+        run: gradle publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
