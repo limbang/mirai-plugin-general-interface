@@ -51,7 +51,7 @@ publishing {
                 name.set("Mirai plugin general interface")
                 packaging = "jar"
                 url.set("https://github.com/limbang/mirai-plugin-general-interface")
-                description.set("Mirai plugin general interface")
+                description.set("limbang to mirai plugin general interface")
 
                 scm {
                     url.set("https://github.com/limbang/mirai-plugin-general-interface")
@@ -59,7 +59,7 @@ publishing {
                 }
 
                 licenses {
-                    licenses {
+                    license {
                         name.set("GNU Affero General Public License v3.0")
                         url.set("https://choosealicense.com/licenses/agpl-3.0/")
                     }
