@@ -20,17 +20,20 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Setting permissions
-        run: chmod -R 777 *
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+        uses: gradle/wrapper-validation-action@v1
 
       - name: Publish package
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: publish
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.ORG_GRADLE_PROJECT_signingKeyId }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}

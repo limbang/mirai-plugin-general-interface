@@ -1,10 +1,11 @@
 plugins {
     kotlin("jvm") version "1.6.21"
     `maven-publish`
+    signing
 }
 
 group = "top.limbang"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1-alpha"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
@@ -43,27 +44,49 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("gpr") {
+        create<MavenPublication>("mavenJava") {
             artifactId = "mirai-plugin-general-interface"
             from(components["java"])
             pom {
+                name.set("Mirai plugin general interface")
+                packaging = "jar"
+                url.set("https://github.com/limbang/mirai-plugin-general-interface")
+                description.set("Mirai plugin general interface")
+
+                scm {
+                    url.set("https://github.com/limbang/mirai-plugin-general-interface")
+                    connection.set("git@github.com:limbang/mirai-plugin-general-interface.git")
+                }
+
                 licenses {
                     licenses {
                         name.set("GNU Affero General Public License v3.0")
                         url.set("https://choosealicense.com/licenses/agpl-3.0/")
                     }
-                    developers {
-                        developer {
-                            name.set("limbang")
-                            email.set("495071565@qq.com")
-                        }
-                    }
-                    scm {
-                        connection.set("git@github.com:limbang/mirai-plugin-general-interface.git")
-                        url.set("https://github.com/limbang/mirai-plugin-general-interface")
+                }
+
+                developers {
+                    developer {
+                        name.set("limbang")
+                        email.set("495071565@qq.com")
                     }
                 }
+
             }
         }
+    }
+}
+
+signing {
+    val signingKeyId: String? by project
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    sign(publishing.publications["mavenJava"])
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }
