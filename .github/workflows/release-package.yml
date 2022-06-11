@@ -2,10 +2,30 @@ name: Publish package to the Maven Central Repository and GitHub Packages
 on:
   # 触发条件
   release:
-    types: [ created ]
+    types: [ published ]
 jobs:
-  # 任务名称
+  # 校验tag是否满足语义化版本格式
+  check-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Regex Match
+        id: regex-match
+        run: |
+            result=$(printf ${{github.ref_name}} | perl -ne 'printf if /^v(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/')
+            echo "::set-output name=result::$result"
+
+      - name: Check Tag
+        if: ${{ steps.regex-match.outputs.result != github.ref_name }}
+        uses: actions/github-script@v4
+        with:
+          script: core.setFailed('Invalid Tag:${{github.ref_name}}')
+
+  # Push Tag时自动发布新版本到Maven中央仓库
   publish:
+    needs: [check-tag]
     runs-on: ubuntu-latest
     permissions:
       contents: read

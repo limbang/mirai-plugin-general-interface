@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "top.limbang"
-version = "0.0.1-alpha"
+version = "0.0.1-alpha.1"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
@@ -56,6 +56,7 @@ publishing {
                 scm {
                     url.set("https://github.com/limbang/mirai-plugin-general-interface")
                     connection.set("git@github.com:limbang/mirai-plugin-general-interface.git")
+                    developerConnection.set("https://github.com/limbang/mirai-plugin-general-interface.git")
                 }
 
                 licenses {
@@ -67,6 +68,7 @@ publishing {
 
                 developers {
                     developer {
+                        id.set("limbang")
                         name.set("limbang")
                         email.set("495071565@qq.com")
                     }
