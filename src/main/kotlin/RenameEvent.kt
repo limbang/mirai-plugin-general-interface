@@ -17,4 +17,4 @@ import net.mamoe.mirai.event.AbstractEvent
  * @property oldName 旧名称
  * @property newName 新名称
  */
-class RenameEvent(val oldName: String, val newName: String) : AbstractEvent()
+class RenameEvent(val pluginId: String, val oldName: String, val newName: String) : AbstractEvent()
