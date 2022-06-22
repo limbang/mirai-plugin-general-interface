@@ -1,11 +1,21 @@
 plugins {
-    kotlin("jvm") version "1.6.21"
+    val kotlinVersion = "1.7.0"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     `maven-publish`
     signing
+
+    id("net.mamoe.mirai-console") version "2.12.0-RC"
 }
 
 group = "top.limbang"
-version = "1.0.0"
+version = "1.0.1"
+
+mirai {
+    coreVersion = "2.11.1"
+    consoleVersion = "2.11.1"
+}
+
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
@@ -13,7 +23,6 @@ repositories {
 }
 
 dependencies {
-    implementation("net.mamoe:mirai-core-api:2.11.1")
     testImplementation(kotlin("test"))
 }
 

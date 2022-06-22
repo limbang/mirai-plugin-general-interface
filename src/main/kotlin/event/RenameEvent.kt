@@ -5,7 +5,7 @@
  * Use of this source code is governed by the GNU AGPLv3 license that can be found in the "LICENSE" file.
  */
 
-package top.limbang
+package top.limbang.mirai.event
 
 import net.mamoe.mirai.event.AbstractEvent
 
@@ -14,7 +14,8 @@ import net.mamoe.mirai.event.AbstractEvent
  *
  * 用于插件之间联动重命名
  *
+ * @property pluginId 插件ID
  * @property oldName 旧名称
  * @property newName 新名称
  */
-class RenameEvent(val pluginId: String, val oldName: String, val newName: String) : AbstractEvent()
+data class RenameEvent(val pluginId: String, val oldName: String, val newName: String) : AbstractEvent()
