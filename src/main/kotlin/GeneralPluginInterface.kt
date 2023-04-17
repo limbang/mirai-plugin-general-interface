@@ -13,7 +13,7 @@ import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 object GeneralPluginInterface : KotlinPlugin(JvmPluginDescription(
     id = "top.limbang.general-plugin-interface",
     name = "GeneralPluginInterface",
-    version = "1.0.1"
+    version = "1.0.2"
 ) {
     author("limbang")
     info("limbang的通用插件接口")

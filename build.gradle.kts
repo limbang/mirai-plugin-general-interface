@@ -1,20 +1,15 @@
 plugins {
-    val kotlinVersion = "1.7.0"
+    val kotlinVersion = "1.8.10"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     `maven-publish`
     signing
 
-    id("net.mamoe.mirai-console") version "2.12.0-RC"
+    id("net.mamoe.mirai-console") version "2.14.0"
 }
 
 group = "top.limbang"
-version = "1.0.1"
-
-mirai {
-    coreVersion = "2.11.1"
-    consoleVersion = "2.11.1"
-}
+version = "1.0.2"
 
 
 repositories {
